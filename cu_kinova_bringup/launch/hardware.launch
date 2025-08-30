@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+   <!-- temporarily use upstream xacro -->
+   <param name="robot_description" command="xacro $(find kortex_description)/multiple_robots/kortex_dual_robots.xacro
+            left_arm:=gen3
+            left_gripper:=robotiq_2f_85
+            left_dof:=7
+            left_prefix:=left
+            left_vision:=true
+            left_sim:=false
+            right_arm:=gen3
+            right_gripper:=robotiq_2f_85
+            right_dof:=7
+            right_prefix:=right
+            right_vision:=true
+            right_sim:=false
+            "
+    />
+
+    <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch">
+        <arg name="ip_address" value="left-arm"/>
+        <arg name="arm" value="gen3"/>
+        <arg name="gripper" value="robotiq_2f_85"/>
+        <arg name="prefix" value="left"/>
+        <arg name="robot_name" value="left"/>
+    </include>
+    <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch">
+        <arg name="ip_address" value="right-arm"/>
+        <arg name="arm" value="gen3"/>
+        <arg name="gripper" value="robotiq_2f_85"/>
+        <arg name="prefix" value="right"/>
+        <arg name="robot_name" value="right"/>
+    </include>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[base_feedback/joint_state]</rosparam>
+        <param name="rate" value="40" />
+    </node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+</launch>
