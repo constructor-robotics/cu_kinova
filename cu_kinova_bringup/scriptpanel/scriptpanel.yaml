@@ -1,0 +1,19 @@
+config:
+    num_buttons_per_row: 2
+    button_width: 140
+    button_height: 60
+    font: LiberationMono:Bold
+scripts:
+    - label: Launch
+      script: launch_hardware.sh
+      tooltip: roslaunch main components
+      terminal: true
+      group: A-setup_robot
+    - label: RQT reconfigure
+      script: rqt_reconfigure.sh
+      tooltip: RQT gui for dynamic_reconfigure
+      group: A_setup_robot
+#    - label: Ready
+#      script: move_to_ready.sh
+#      tooltip: move arm to ready posture
+#      group: move

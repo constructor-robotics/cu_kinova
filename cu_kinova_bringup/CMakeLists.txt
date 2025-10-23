@@ -5,4 +5,13 @@ find_package(catkin REQUIRED)
 
 catkin_package()
 
-install(DIRECTORY launch ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(
+  DIRECTORY launch config
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(
+  DIRECTORY scriptpanel
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  USE_SOURCE_PERMISSIONS
+)
