@@ -2,22 +2,7 @@
 <launch>
    <arg name="rviz" default="true" />
 
-   <!-- TODO: drop all these parameters from upstream -->
-   <param name="robot_description" command="xacro $(find cu_kinova_description)/robots/default.urdf.xacro
-            left_arm:=gen3
-            left_gripper:=robotiq_2f_85
-            left_dof:=7
-            left_prefix:=left_
-            left_vision:=true
-            left_sim:=false
-            right_arm:=gen3
-            right_gripper:=robotiq_2f_85
-            right_dof:=7
-            right_prefix:=right_
-            right_vision:=true
-            right_sim:=false
-            "
-    />
+   <include file="$(find cu_kinova_description)/launch/upload_description.launch" />
 
     <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch">
         <arg name="ip_address" value="left-arm"/>
