@@ -4,10 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
         - /Status1
-        - /Camera Left1/Left Camera1/Visibility1/Camera Left1
-        - /Camera Right1/Right Camera1/Visibility1/Camera Right1
       Splitter Ratio: 0.6537102460861206
     Tree Height: 707
   - Class: rviz/Selection
@@ -301,6 +298,72 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/Effort
+      Enabled: false
+      History Length: 1
+      Joints:
+        left_finger_joint:
+          Value: false
+        left_joint_1:
+          Value: true
+        left_joint_2:
+          Value: true
+        left_joint_3:
+          Value: true
+        left_joint_4:
+          Value: true
+        left_joint_5:
+          Value: true
+        left_joint_6:
+          Value: true
+        left_joint_7:
+          Value: true
+        left_left_inner_finger_joint:
+          Value: false
+        left_left_inner_knuckle_joint:
+          Value: false
+        left_right_inner_finger_joint:
+          Value: false
+        left_right_inner_knuckle_joint:
+          Value: false
+        left_right_outer_knuckle_joint:
+          Value: false
+        right_finger_joint:
+          Value: false
+        right_joint_1:
+          Value: true
+        right_joint_2:
+          Value: true
+        right_joint_3:
+          Value: true
+        right_joint_4:
+          Value: true
+        right_joint_5:
+          Value: true
+        right_joint_6:
+          Value: true
+        right_joint_7:
+          Value: true
+        right_left_inner_finger_joint:
+          Value: false
+        right_left_inner_knuckle_joint:
+          Value: false
+        right_right_inner_finger_joint:
+          Value: false
+        right_right_inner_knuckle_joint:
+          Value: false
+        right_right_outer_knuckle_joint:
+          Value: false
+      Name: Joint Torques
+      Queue Size: 1
+      Robot Description: robot_description
+      Scale: 1
+      TF Prefix: ""
+      Topic: /joint_states
+      Unreliable: false
+      Value: false
+      Width: 0.012000000104308128
     - Class: rviz/Image
       Enabled: true
       Image Topic: /cam/image_color
@@ -356,6 +419,7 @@ Visualization Manager:
               Right Camera: true
               Value: true
             Grid: true
+            Joint Torques: true
             RobotModel: true
             Value: true
           Zoom Factor: 1
@@ -429,6 +493,7 @@ Visualization Manager:
               PointCloud: false
               Value: true
             Grid: true
+            Joint Torques: true
             RobotModel: true
             Value: true
           Zoom Factor: 1
@@ -491,17 +556,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.48731908202171326
-        Y: 0.2508307099342346
-        Z: 0.15427754819393158
+        X: 0.414283812046051
+        Y: 0.1849219799041748
+        Z: 0.1542137861251831
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.40979623794555664
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
-      Yaw: 4.654926300048828
+      Yaw: 4.739930629730225
     Saved: ~
 Window Geometry:
   Cam:
