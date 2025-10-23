@@ -44,5 +44,14 @@
     </node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
+    <include file="$(find cu_logitech_quickcam)/launch/cam.launch" />
+    <param name="cam/camera_frame_id" value="cam"/>
+    <group ns="cam/intrinsic_controls">
+        <param name="brightness" value="0"/>
+        <param name="contrast" value="10"/>
+        <param name="exposure" value="15"/>
+        <param name="gain" value="75"/>
+    </group>
+
     <include if="$(arg rviz)" file="$(dirname)/rviz.launch" />
 </launch>
