@@ -1,21 +1,43 @@
 <?xml version="1.0"?>
 
-<robot name="dual_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="cu_kinova" xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
 
-    <link name="world" />
-    <joint name="world_to_left_base" type="fixed">
-        <child link="left_base_link" />
-        <parent link="world" />
-        <!-- Here you can change the origin of the left arm-->
-        <origin xyz="0 0 0" rpy="0 0 0" />    
-    </joint> 
-    <joint name="world_to_right_base" type="fixed">
-        <child link="right_base_link" />
-        <parent link="world" />
-        <!-- Here you can change the origin of the right arm -->
-        <origin xyz="0.793 -0.054 -0.015" rpy="0 0 3.0997" />    
+    <link name="table_top" />
+    <link name="table">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.8 1.6 0.3"/>
+            </geometry>
+            <material name="dark_brown">
+                <color rgba="0.4 0.1 0.1 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.8 1.6 0.3"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="table_top_joint" type="fixed">
+        <parent link="table"/>
+        <child link="table_top"/>
+        <origin xyz="0 0 ${0.3/2}" rpy="0 0 0"/>
+    </joint>
 
+    <joint name="table_top_to_left_base_joint" type="fixed">
+        <child link="left_base_link" />
+        <parent link="table_top" />
+        <!-- Here you can change the origin of the left arm-->
+        <origin xyz="${-0.4+0.09} ${0.8-0.29} 0.0" rpy="0 0 0"/>
+    </joint> 
+    <joint name="left_to_right_base" type="fixed">
+        <child link="right_base_link" />
+        <parent link="left_base_link" />
+        <!-- Here you can change the origin of the right arm -->
+        <origin xyz="-0.0291376 -1.0805 0" rpy="0 0 0" />
     </joint>
 
     <xacro:load_robot 
