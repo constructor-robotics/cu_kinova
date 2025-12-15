@@ -30,13 +30,12 @@
     <joint name="table_top_to_left_base_joint" type="fixed">
         <child link="left_base_link" />
         <parent link="table_top" />
-        <!-- Here you can change the origin of the left arm-->
-        <origin xyz="${-0.4+0.09} ${0.8-0.29} 0.0" rpy="0 0 0"/>
+	<!-- TODO: model the black mounting plates that represent the 0.02m in z -->
+        <origin xyz="${-0.4+0.09} ${0.8-0.29} 0.02" rpy="0 0 0"/>
     </joint> 
     <joint name="left_to_right_base" type="fixed">
         <child link="right_base_link" />
         <parent link="left_base_link" />
-        <!-- Here you can change the origin of the right arm -->
         <origin xyz="-0.0291376 -1.0805 0" rpy="0 0 0" />
     </joint>
 
