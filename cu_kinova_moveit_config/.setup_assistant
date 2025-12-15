@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: cu_kinova_description
+    relative_path: robots/default.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/cu_kinova.srdf
+  CONFIG:
+    author_name: Michael Goerner
+    author_email: migoerner@constructor.university
+    generated_timestamp: 1765804394

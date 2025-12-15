@@ -3,13 +3,14 @@
    <arg name="rviz" default="true" />
 
    <include file="$(find cu_kinova_description)/launch/upload_description.launch" />
-
+   
     <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch" ns="left">
         <arg name="ip_address" value="left-arm"/>
         <arg name="arm" value="gen3"/>
         <arg name="gripper" value="robotiq_2f_85"/>
         <arg name="prefix" value="left_"/>
         <arg name="robot_name" value="left"/>
+        <arg name="use_hard_limits" value="true"/>
     </include>
     <include file="$(find kinova_vision)/launch/kinova_vision.launch" ns="left">
         <arg name="device" value="left-arm" />
@@ -27,6 +28,7 @@
         <arg name="gripper" value="robotiq_2f_85"/>
         <arg name="prefix" value="right_"/>
         <arg name="robot_name" value="right"/>
+        <arg name="use_hard_limits" value="true"/>
     </include>
     <include file="$(find kinova_vision)/launch/kinova_vision.launch" ns="right">
         <arg name="device" value="right-arm" />
@@ -43,6 +45,8 @@
         <param name="rate" value="40" />
     </node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <include file="$(find cu_kinova_moveit_config)/launch/move_group.launch" />
 
     <include file="$(find cu_logitech_quickcam)/launch/cam.launch" />
     <param name="cam/camera_frame_id" value="cam"/>
