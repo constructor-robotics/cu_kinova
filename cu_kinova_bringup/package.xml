@@ -10,4 +10,11 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <exec_depend>kortex_driver</exec_depend>
+  <exec_depend>kinova_vision</exec_depend>
+  <exec_depend>cu_kinova_description</exec_depend>
+  <exec_depend>cu_kinova_moveit_config</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>spacenav_ros</exec_depend>
 </package>
