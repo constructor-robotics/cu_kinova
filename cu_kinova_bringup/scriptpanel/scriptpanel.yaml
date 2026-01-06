@@ -1,5 +1,5 @@
 config:
-    num_buttons_per_row: 2
+    num_buttons_per_row: 3
     button_width: 140
     button_height: 60
     font: LiberationMono:Bold
@@ -8,6 +8,10 @@ scripts:
       script: launch_hardware.sh
       tooltip: roslaunch main components
       terminal: true
+      group: A-setup_robot
+    - label: Clear Faults
+      script: clear_faults.sh
+      tooltip: Resets error states of both arms
       group: A-setup_robot
     - label: Space Mouse Teleop
       script: spacemice_teleop.sh
