@@ -1,13 +1,19 @@
 <?xml version="1.0"?>
 <launch>
-    <node pkg="spacenav_ros" type="spacenav_node" name="spacenav" ns="left/spacemouse">
-        <param name="device" value="SpaceExplorer"/>
-        <param name="path" value="/dev/spacemouse_explorer"/>
-        <param name="frame_id" value="spacemouse_left"/>
-    </node>
-    <node pkg="spacenav_ros" type="spacenav_node" name="spacenav" ns="right/spacemouse">
-        <param name="device" value="SpaceMouse Compact"/>
-        <param name="path" value="/dev/spacemouse_compact"/>
-        <param name="frame_id" value="spacemouse_right"/>
-    </node>
+    <group ns="left/spacemouse">
+        <node pkg="spacenav_ros" type="spacenav_node" name="spacenav">
+            <param name="device" value="SpaceExplorer"/>
+            <param name="path" value="/dev/spacemouse_explorer"/>
+            <param name="frame_id" value="spacemouse_left"/>
+        </node>
+	<node name="static_tf" pkg="tf2_ros" type="static_transform_publisher" args="-0.6 0.3 0.0 0 0 0 1 table_top spacemouse_left"/>
+    </group>
+    <group ns="right/spacemouse">
+        <node pkg="spacenav_ros" type="spacenav_node" name="spacenav">
+            <param name="device" value="SpaceMouse Compact"/>
+            <param name="path" value="/dev/spacemouse_compact"/>
+            <param name="frame_id" value="spacemouse_right"/>
+        </node>
+        <node name="static_tf" pkg="tf2_ros" type="static_transform_publisher" args="-0.6 -0.3 0.0 0 0 0 1 table_top spacemouse_right"/>
+    </group>
 </launch>
