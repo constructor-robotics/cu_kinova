@@ -2,10 +2,12 @@
 <launch>
     <node pkg="spacenav_ros" type="spacenav_node" name="spacenav" ns="left/spacemouse">
         <param name="device" value="SpaceExplorer"/>
+        <param name="path" value="/dev/spacemouse_explorer"/>
         <param name="frame_id" value="spacemouse_left"/>
     </node>
     <node pkg="spacenav_ros" type="spacenav_node" name="spacenav" ns="right/spacemouse">
         <param name="device" value="SpaceMouse Compact"/>
+        <param name="path" value="/dev/spacemouse_compact"/>
         <param name="frame_id" value="spacemouse_right"/>
     </node>
 </launch>
