@@ -1,44 +1,60 @@
 <?xml version="1.0"?>
 <launch>
-   <arg name="rviz" default="true" />
+    <arg name="rviz" default="true" />
 
-   <include file="$(find cu_kinova_description)/launch/upload_description.launch" />
-   
-    <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch" ns="left">
-        <arg name="ip_address" value="left-arm"/>
-        <arg name="arm" value="gen3"/>
-        <arg name="gripper" value="robotiq_2f_85"/>
+    <include file="$(find cu_kinova_description)/launch/upload_description.launch" />
+
+    <group ns="left">
+        <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch">
+            <arg name="ip_address" value="left-arm"/>
+            <arg name="arm" value="gen3"/>
+            <arg name="gripper" value="robotiq_2f_85"/>
+            <arg name="robot_name" value="left"/>
+            <arg name="use_hard_limits" value="true"/>
+        </include>
+        <!--
+        override this yaml configuration here specifically to only add the prefix to joint names in /joint_states
+        and not to node/topic names which are namespaced already through this launch group.
+        -->
         <arg name="prefix" value="left_"/>
-        <arg name="robot_name" value="left"/>
-        <arg name="use_hard_limits" value="true"/>
-    </include>
-    <include file="$(find kinova_vision)/launch/kinova_vision.launch" ns="left">
-        <arg name="device" value="left-arm" />
-        <arg name="num_worker_threads" value="2" /> <!-- reduce workers with weaker hardware -->
-        <!-- <arg name="camera" value="left_camera" /> -->
-        <arg name="depth_registration" value="true" />
-        <arg name="camera_link_frame_id" value="left_camera_link"/>
-        <arg name="depth_frame_id" value="left_camera_depth_frame"/>
-        <arg name="color_frame_id" value="left_camera_color_frame"/>
-    </include>
+        <rosparam command="load" ns="left_driver" file="$(find kortex_description)/arms/gen3/7dof/config/joint_limits.yaml" subst_value="true"/>
 
-    <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch" ns="right">
-        <arg name="ip_address" value="right-arm"/>
-        <arg name="arm" value="gen3"/>
-        <arg name="gripper" value="robotiq_2f_85"/>
+        <include file="$(find kinova_vision)/launch/kinova_vision.launch">
+            <arg name="device" value="left-arm" />
+            <arg name="num_worker_threads" value="2" /> <!-- reduce workers with weaker hardware -->
+            <!-- <arg name="camera" value="left_camera" /> -->
+            <arg name="depth_registration" value="true" />
+            <arg name="camera_link_frame_id" value="left_camera_link"/>
+            <arg name="depth_frame_id" value="left_camera_depth_frame"/>
+            <arg name="color_frame_id" value="left_camera_color_frame"/>
+        </include>
+    </group>
+
+    <group ns="right">
+        <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch">
+            <arg name="ip_address" value="right-arm"/>
+            <arg name="arm" value="gen3"/>
+            <arg name="gripper" value="robotiq_2f_85"/>
+            <arg name="robot_name" value="right"/>
+            <arg name="use_hard_limits" value="true"/>
+        </include>
+        <!--
+        override this yaml configuration here specifically to only add the prefix to joint names in /joint_states
+        and not to node/topic names which are namespaced already through this launch group.
+        -->
         <arg name="prefix" value="right_"/>
-        <arg name="robot_name" value="right"/>
-        <arg name="use_hard_limits" value="true"/>
-    </include>
-    <include file="$(find kinova_vision)/launch/kinova_vision.launch" ns="right">
-        <arg name="device" value="right-arm" />
-        <arg name="num_worker_threads" value="2" /> <!-- reduce workers with weaker hardware -->
-        <!-- <arg name="camera" value="right_camera" /> -->
-        <arg name="depth_registration" value="true" />
-        <arg name="camera_link_frame_id" value="right_camera_link"/>
-        <arg name="depth_frame_id" value="right_camera_depth_frame"/>
-        <arg name="color_frame_id" value="right_camera_color_frame"/>
-    </include>
+        <rosparam command="load" ns="right_driver" file="$(find kortex_description)/arms/gen3/7dof/config/joint_limits.yaml" subst_value="true"/>
+
+        <include file="$(find kinova_vision)/launch/kinova_vision.launch">
+            <arg name="device" value="right-arm" />
+            <arg name="num_worker_threads" value="2" /> <!-- reduce workers with weaker hardware -->
+            <!-- <arg name="camera" value="left_camera" /> -->
+            <arg name="depth_registration" value="true" />
+            <arg name="camera_link_frame_id" value="right_camera_link"/>
+            <arg name="depth_frame_id" value="right_camera_depth_frame"/>
+            <arg name="color_frame_id" value="right_camera_color_frame"/>
+        </include>
+    </group>
 
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam param="source_list">[left/base_feedback/joint_state,right/base_feedback/joint_state]</rosparam>
