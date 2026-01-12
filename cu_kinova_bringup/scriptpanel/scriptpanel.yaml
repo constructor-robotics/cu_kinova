@@ -20,6 +20,23 @@ scripts:
         TODO: Also start teleoperation nodes.
       terminal: true
       group: A-setup_robot
+    - label: Move to zero state
+      script: move_to_zero.sh
+      tooltip: |
+        Move arms upright.
+      group: B-move
+    - label: Move to ready state
+      script: move_to_ready.sh
+      tooltip: |
+        Move arms to preparatory state
+        to prepare for manipulation.
+      group: B-move
+    - label: Move to resting state
+      script: move_to_resting.sh
+      tooltip: |
+        Move to resting state
+        before shutting down the arms.
+      group: B-move
 #    - label: RQT reconfigure
 #      script: rqt_reconfigure.sh
 #      tooltip: RQT gui for dynamic_reconfigure
