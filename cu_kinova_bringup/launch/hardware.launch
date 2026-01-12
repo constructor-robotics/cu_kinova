@@ -63,6 +63,7 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
     <include file="$(find cu_kinova_moveit_config)/launch/move_group.launch" />
+    <node name="moveit_by_name" pkg="moveit_by_name" type="moveit_by_name" />
 
     <include file="$(find cu_logitech_quickcam)/launch/cam.launch" />
     <param name="cam/camera_frame_id" value="cam"/>
