@@ -2,16 +2,42 @@
 
 <robot name="cu_kinova" xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+    <xacro:include filename="$(find cu_kinova_description)/urdf/table.urdf.xacro" />
+    
+    <link name="wall">
+        <visual>
+            <geometry>
+                <box size="2 0.2 3"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="3 0.5 3"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </collision>
 
-    <link name="table_top" />
-    <link name="table">
+    </link>
+    <joint name="wall_joint" type="fixed">
+        <parent link="table" />
+        <child link="wall" />
+        <origin xyz="-0.18238 1.1074 ${1.5}" rpy="0 0 0.43" />
+    </joint>
+    <xacro:table length="0.8" width="1.6" height="0.72" name="table" /> 
+
+     <!-- <link name="table_top" />  -->
+     <!-- <link name="table">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <box size="0.8 1.6 0.3"/>
             </geometry>
             <material name="dark_brown">
-                <color rgba="0.4 0.1 0.1 1.0"/>
+                <color rgba=" 1.0 0.1 0.1 1.0"/>
             </material>
         </visual>
         <collision>
@@ -19,13 +45,14 @@
             <geometry>
                 <box size="0.8 1.6 0.3"/>
             </geometry>
-        </collision>
-    </link>
-    <joint name="table_top_joint" type="fixed">
+      </collision> 
+    
+    </link> 
+     <joint name="table_top_joint" type="fixed">
         <parent link="table"/>
         <child link="table_top"/>
         <origin xyz="0 0 ${0.3/2}" rpy="0 0 0"/>
-    </joint>
+    </joint>  -->
 
     <joint name="table_top_to_left_base_joint" type="fixed">
         <child link="left_base_link" />

@@ -5,6 +5,6 @@ find_package(catkin REQUIRED)
 
 catkin_package()
 
-install(DIRECTORY robots launch
+install(DIRECTORY robots launch urdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

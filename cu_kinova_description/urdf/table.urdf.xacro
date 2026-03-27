@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="table">
+
+<xacro:macro name="table" params="length width height name plate_thickness:=0.03 leg_radius:=0.02">
+    <material name="${name}_brown">
+        <color rgba="0.6 0.4 0.2 1"/>
+    </material>
+    <material name="${name}_black">
+        <color rgba="0.1 0.1 0.1 1"/>
+    </material>
+
+    <link name="${name}">
+        <collision>
+            <geometry>
+                <box size="${length} ${width} ${height}"/>
+            </geometry>
+            <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
+        </collision>
+        <!-- Front right leg -->
+        <visual>
+            <geometry>
+            <cylinder radius="${leg_radius}" length="${height-plate_thickness}"/>
+            </geometry>
+            <origin xyz="${length/2-leg_radius} ${width/2-leg_radius} ${(height-plate_thickness)/2}" rpy="0 0 0"/>
+            <material name="${name}_black"/>
+        </visual>
+        <!-- Front left leg -->
+        <visual>
+            <geometry>
+            <cylinder radius="${leg_radius}" length="${height-plate_thickness}"/>
+            </geometry>
+            <origin xyz="-${length/2-leg_radius} ${width/2-leg_radius} ${(height-plate_thickness)/2}" rpy="0 0 0"/>
+            <material name="${name}_black"/>
+        </visual>
+        <!-- Back right leg -->
+        <visual>
+            <geometry>
+            <cylinder radius="${leg_radius}" length="${height-plate_thickness}"/>
+            </geometry>
+            <origin xyz="${length/2-leg_radius} -${width/2-leg_radius} ${(height-plate_thickness)/2}" rpy="0 0 0"/>
+            <material name="${name}_black"/>
+        </visual>
+        <!-- Back left leg -->
+        <visual>
+            <geometry>
+            <cylinder radius="${leg_radius}" length="${height-plate_thickness}"/>
+            </geometry>
+            <origin xyz="-${length/2-leg_radius} -${width/2-leg_radius} ${(height-plate_thickness)/2}" rpy="0 0 0"/>
+            <material name="${name}_black"/>
+        </visual>
+        <visual>
+            <geometry>
+                <box size="${length} ${width} 0.03"/>
+            </geometry>
+            <origin xyz="0 0 ${height-(plate_thickness/2)}" rpy="0 0 0"/>
+            <material name="${name}_brown"/>
+        </visual>
+    </link>
+
+    <link name="${name}_top"/>
+
+    <joint name="${name}_top_joint" type="fixed">
+        <parent link="${name}"/>
+        <child link="${name}_top"/>
+        <origin xyz="0 0 ${height}" rpy="0 0 0"/>
+    </joint>
+</xacro:macro>
+
+</robot>
