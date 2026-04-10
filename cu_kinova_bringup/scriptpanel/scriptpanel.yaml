@@ -17,7 +17,6 @@ scripts:
       script: spacemice_teleop.sh
       tooltip: |
         Launch Spacemice drivers.
-        TODO: Also start teleoperation nodes.
       terminal: true
       group: A-setup_robot
     - label: Move to zero state

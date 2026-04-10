@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec roslaunch cu_kinova_bringup spacemice.launch
+exec roslaunch kinova_explorer bimanual_teleop.launch
