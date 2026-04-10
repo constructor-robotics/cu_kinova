@@ -73,6 +73,6 @@
         <param name="exposure" value="15"/>
         <param name="gain" value="75"/>
     </group>
-
+    <include file="$(find tts_piper)/launch/tts_standalone.launch" />
     <include if="$(arg rviz)" file="$(dirname)/rviz.launch" />
 </launch>
