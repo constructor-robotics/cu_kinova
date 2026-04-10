@@ -25,34 +25,39 @@
     <joint name="wall_joint" type="fixed">
         <parent link="table" />
         <child link="wall" />
-        <origin xyz="-0.18238 1.1074 ${1.5}" rpy="0 0 0.43" />
+        <origin xyz="-0.18238 1.1074 1.5" rpy="0 0 0.43" />
     </joint>
     <xacro:table length="0.8" width="1.6" height="0.72" name="table" /> 
-
-     <!-- <link name="table_top" />  -->
-     <!-- <link name="table">
+    <xacro:table length="0.6" width="1" height="0.735" name="operator_table" /> 
+    <joint name="operator_table_joint" type="fixed">
+        <parent link="table" />
+        <child link="operator_table" />
+        <origin xyz="-0.7 0 0" rpy="0 0 0" />
+    </joint>
+    <xacro:property name="clearance_height" value="0.6"/>
+    <material name="clearance_volume">
+        <color rgba="0.6 0.4 0.2 0.2"/>
+    </material>
+    <link name="operator_clearance">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.8 1.6 0.3"/>
+                <box size="0.6 1 ${clearance_height}"/>
             </geometry>
-            <material name="dark_brown">
-                <color rgba=" 1.0 0.1 0.1 1.0"/>
-            </material>
+            <origin xyz="0 0 0.0" rpy="0 0 0"/>
+            <material name="clearance_volume"/>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.8 1.6 0.3"/>
+                <box size="0.6 1 ${clearance_height}"/>
             </geometry>
-      </collision> 
-    
-    </link> 
-     <joint name="table_top_joint" type="fixed">
-        <parent link="table"/>
-        <child link="table_top"/>
-        <origin xyz="0 0 ${0.3/2}" rpy="0 0 0"/>
-    </joint>  -->
+            <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        </collision>
+    </link>
+    <joint name="operator_clearance_joint" type="fixed">
+        <parent link="operator_table_top"/>
+        <child link="operator_clearance"/>
+        <origin xyz="0.0 0.0 ${clearance_height/2}" rpy="0 0 0"/>
+    </joint>
 
     <joint name="table_top_to_left_base_joint" type="fixed">
         <child link="left_base_link" />
