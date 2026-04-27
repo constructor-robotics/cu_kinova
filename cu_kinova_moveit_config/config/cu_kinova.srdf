@@ -30,6 +30,12 @@
     <group name="right_arm">
         <chain base_link="right_base_link" tip_link="right_tool_frame"/>
     </group>
+    <group name="left_arm_local">
+        <chain base_link="left_base_link" tip_link="left_tool_frame"/>
+    </group>
+    <group name="right_arm_local">
+        <chain base_link="right_base_link" tip_link="right_tool_frame"/>
+    </group>
     <group name="right_gripper">
         <joint name="right_gripper_base_joint"/>
         <joint name="right_finger_joint"/>
