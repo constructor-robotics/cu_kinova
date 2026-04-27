@@ -9,7 +9,7 @@ scripts:
       tooltip: |
         Sends software e-stop to both arms
         Clear Faults to continue
-      group: A-setup_robot
+      group: A-C-setup_robot
     - label: Clear Faults
       script: clear_faults.sh
       tooltip: Resets error states of both arms
