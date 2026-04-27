@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="side" />
+    
+    <group ns="$(arg side)">
+        <include file="$(find kortex_driver)/launch/kortex_arm_driver.launch">
+            <arg name="ip_address" value="$(arg side)-arm"/>
+            <arg name="arm" value="gen3"/>
+            <arg name="gripper" value="robotiq_2f_85"/>
+            <arg name="robot_name" value="$(arg side)"/>
+            <arg name="use_hard_limits" value="true"/>
+        </include>
+        <!--
+        override this yaml configuration here specifically to only add the prefix to joint names in /joint_states
+        and not to node/topic names which are namespaced already through this launch group.
+        Set arg "prefix" to use with subst_value below
+        -->
+        <arg name="prefix" value="$(arg side)_"/>
+        <rosparam command="load" ns="$(arg side)_driver" file="$(find kortex_description)/arms/gen3/7dof/config/joint_limits.yaml" subst_value="true"/>
+
+        <include file="$(find kinova_vision)/launch/kinova_vision.launch">
+            <arg name="device" value="$(arg side)-arm" />
+            <arg name="num_worker_threads" value="2" /> <!-- reduce workers with weaker hardware -->
+            <!-- <arg name="camera" value="$(arg side)_camera" /> -->
+            <arg name="depth_registration" value="true" />
+            <arg name="camera_link_frame_id" value="$(arg side)_camera_link"/>
+            <arg name="depth_frame_id" value="$(arg side)_camera_depth_frame"/>
+            <arg name="color_frame_id" value="$(arg side)_camera_color_frame"/>
+        </include>
+    </group>
+</launch>
