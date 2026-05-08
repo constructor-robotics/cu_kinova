@@ -13,18 +13,18 @@ scripts:
     - label: Clear Faults
       script: clear_faults.sh
       tooltip: Resets error states of both arms
-      group: A-setup_robot
+      group: A-ZZZ-setup_robot
     - label: Launch
       script: launch_hardware.sh
       tooltip: roslaunch main components
       terminal: true
-      group: A-setup_robot
+      group: A-ZZZA-setup_robot
     - label: Space Mouse Teleop
       script: spacemice_teleop.sh
       tooltip: |
         Launch Spacemice drivers.
       terminal: true
-      group: A-setup_robot
+      group: A-ZZZA-setup_robot
     - label: Move to zero state
       script: move_to_zero.sh
       tooltip: |
