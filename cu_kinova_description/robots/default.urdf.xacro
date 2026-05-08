@@ -34,7 +34,7 @@
         <child link="operator_table" />
         <origin xyz="-0.7 0 0" rpy="0 0 0" />
     </joint>
-    <xacro:property name="clearance_height" value="0.6"/>
+    <xacro:property name="clearance_height" value="0.3"/>
     <material name="clearance_volume">
         <color rgba="0.6 0.4 0.2 0.2"/>
     </material>
@@ -91,13 +91,13 @@
     <joint name="table_top_to_left_base_mount_joint" type="fixed">
         <child link="left_base_mount" />
         <parent link="table_top" />
-        <origin xyz="${-0.4+0.09} ${0.8-0.29} 0.00" rpy="0 0 0"/>
+        <origin xyz="-0.31451 0.53471 0.00" rpy="0 0 -0.03490658503988659"/>
     </joint>
 
     <joint name="left_to_right_base" type="fixed">
         <child link="right_base_mount" />
         <parent link="left_base_mount" />
-        <origin xyz="-0.0291376 -1.0805 0" rpy="0 0 0" />
+        <origin xyz="0.0311126 -1.05908 0" rpy="0 0 0.04363323129985824" />
     </joint>
 
     <xacro:load_robot 
