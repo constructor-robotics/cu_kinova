@@ -127,6 +127,7 @@
     <disable_collisions link1="left_base_link" link2="right_robotiq_arg2f_base_link" reason="Never"/>
     <disable_collisions link1="left_base_link" link2="right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_base_link" link2="table" reason="Adjacent"/>
+    <disable_collisions link1="left_base_mount" link2="table" reason="Adjacent"/>
     <disable_collisions link1="left_bracelet_link" link2="left_forearm_link" reason="Never"/>
     <disable_collisions link1="left_bracelet_link" link2="left_left_inner_finger" reason="Never"/>
     <disable_collisions link1="left_bracelet_link" link2="left_left_inner_finger_pad" reason="Never"/>
@@ -283,6 +284,7 @@
     <disable_collisions link1="right_base_link" link2="right_half_arm_2_link" reason="Never"/>
     <disable_collisions link1="right_base_link" link2="right_shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="right_base_link" link2="table" reason="Never"/>
+    <disable_collisions link1="right_base_mount" link2="table" reason="Adjacent"/>
     <disable_collisions link1="right_bracelet_link" link2="right_forearm_link" reason="Never"/>
     <disable_collisions link1="right_bracelet_link" link2="right_left_inner_finger" reason="Never"/>
     <disable_collisions link1="right_bracelet_link" link2="right_left_inner_finger_pad" reason="Never"/>

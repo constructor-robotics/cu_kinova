@@ -59,15 +59,44 @@
         <origin xyz="0.0 0.0 ${clearance_height/2}" rpy="0 0 0"/>
     </joint>
 
-    <joint name="table_top_to_left_base_joint" type="fixed">
-        <child link="left_base_link" />
+    <xacro:macro name="base_mount" params="side">
+        <link name="${side}_base_mount">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.075" length="0.02"/>
+                </geometry>
+                <origin xyz="0 0 0.01" rpy="0 0 0"/>
+                <material name="black">
+                    <color rgba="0 0 0 1"/>
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.08" length="0.02"/>
+                </geometry>
+                <origin xyz="0 0 0.01" rpy="0 0 0"/>
+            </collision>
+        </link>
+
+        <joint name="${side}_base_mount_to_base_joint" type="fixed">
+            <child link="${side}_base_link" />
+            <parent link="${side}_base_mount" />
+            <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:base_mount side="left" />
+    <xacro:base_mount side="right" />
+
+    <joint name="table_top_to_left_base_mount_joint" type="fixed">
+        <child link="left_base_mount" />
         <parent link="table_top" />
-	<!-- TODO: model the black mounting plates that represent the 0.02m in z -->
-        <origin xyz="${-0.4+0.09} ${0.8-0.29} 0.02" rpy="0 0 0"/>
-    </joint> 
+        <origin xyz="${-0.4+0.09} ${0.8-0.29} 0.00" rpy="0 0 0"/>
+    </joint>
+
     <joint name="left_to_right_base" type="fixed">
-        <child link="right_base_link" />
-        <parent link="left_base_link" />
+        <child link="right_base_mount" />
+        <parent link="left_base_mount" />
         <origin xyz="-0.0291376 -1.0805 0" rpy="0 0 0" />
     </joint>
 
