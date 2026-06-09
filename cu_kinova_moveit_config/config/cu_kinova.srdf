@@ -64,7 +64,7 @@
         <joint name="left_joint_5" value="0"/>
         <joint name="left_joint_6" value="0"/>
         <joint name="left_joint_7" value="0"/>
-        <joint name="right_joint_1" value="0"/>
+        <joint name="right_joint_1" value="3.141592653589793"/>
         <joint name="right_joint_2" value="0"/>
         <joint name="right_joint_3" value="0"/>
         <joint name="right_joint_4" value="0"/>
@@ -73,36 +73,36 @@
         <joint name="right_joint_7" value="0"/>
     </group_state>
     <group_state name="ready" group="arms">
-        <joint name="left_joint_1" value="0.1542"/>
-        <joint name="left_joint_2" value="0.7146"/>
-        <joint name="left_joint_3" value="-0.1542"/>
-        <joint name="left_joint_4" value="1.5609"/>
-        <joint name="left_joint_5" value="-1.484"/>
-        <joint name="left_joint_6" value="-1.3976"/>
-        <joint name="left_joint_7" value="-0.8866"/>
-        <joint name="right_joint_1" value="-0.1542"/>
-        <joint name="right_joint_2" value="0.6734"/>
-        <joint name="right_joint_3" value="-0.1349"/>
-        <joint name="right_joint_4" value="1.5076"/>
-        <joint name="right_joint_5" value="-1.4455"/>
-        <joint name="right_joint_6" value="1.3591"/>
-        <joint name="right_joint_7" value="0.4626"/>
+        <joint name="left_joint_1" value="-0.5287253606967015"/>
+        <joint name="left_joint_2" value="0.6513982836729123"/>
+        <joint name="left_joint_3" value="0.7246814860740315"/>
+        <joint name="left_joint_4" value="1.8886878792635675"/>
+        <joint name="left_joint_5" value="-2.4365351360612015"/>
+        <joint name="left_joint_6" value="-0.8372035708183239"/>
+        <joint name="left_joint_7" value="-0.661817901437848"/>
+        <joint name="right_joint_1" value="-2.4709551615699303"/>
+        <joint name="right_joint_2" value="-0.7195754738950502"/>
+        <joint name="right_joint_3" value="-1.0260483237158429"/>
+        <joint name="right_joint_4" value="-2.0567846098985507"/>
+        <joint name="right_joint_5" value="2.5274298893300418"/>
+        <joint name="right_joint_6" value="0.5257809697955098"/>
+        <joint name="right_joint_7" value="0.32187044829530376"/>
     </group_state>
     <group_state name="resting" group="arms">
-        <joint name="left_joint_1" value="0.32917370153165526"/>
-        <joint name="left_joint_2" value="1.3936668195326365"/>
-        <joint name="left_joint_3" value="-0.03227751241176069"/>
-        <joint name="left_joint_4" value="1.6691431374259966"/>
-        <joint name="left_joint_5" value="-1.3590286811306296"/>
-        <joint name="left_joint_6" value="-1.5525094648537587"/>
-        <joint name="left_joint_7" value="-1.4997064372885394"/>
-        <joint name="right_joint_1" value="-0.11792796886201629"/>
-        <joint name="right_joint_2" value="1.3837824971468073"/>
-        <joint name="right_joint_3" value="-0.11948485283527699"/>
-        <joint name="right_joint_4" value="1.701268450181459"/>
-        <joint name="right_joint_5" value="-1.735464903316676"/>
-        <joint name="right_joint_6" value="1.3923718574525854"/>
-        <joint name="right_joint_7" value="1.6524761432178994"/>
+        <joint name="left_joint_1" value="-0.11675884114347213"/>
+        <joint name="left_joint_2" value="1.4123891083120024"/>
+        <joint name="left_joint_3" value="0.0672631766912655"/>
+        <joint name="left_joint_4" value="1.7325845614397009"/>
+        <joint name="left_joint_5" value="-1.7628965278089286"/>
+        <joint name="left_joint_6" value="-1.4993245399882218"/>
+        <joint name="left_joint_7" value="-1.659591443860319"/>
+        <joint name="right_joint_1" value="3.14109410983373"/>
+        <joint name="right_joint_2" value="-1.3958708516507858"/>
+        <joint name="right_joint_3" value="0.022156349700644562"/>
+        <joint name="right_joint_4" value="-1.8921205607506248"/>
+        <joint name="right_joint_5" value="1.5458343847395295"/>
+        <joint name="right_joint_6" value="1.5625968532727061"/>
+        <joint name="right_joint_7" value="1.8042333153008112"/>
     </group_state>
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
