@@ -1,5 +1,5 @@
 config:
-    num_buttons_per_row: 2
+    num_buttons_per_row: 4
     button_width: 140
     button_height: 60
     font: LiberationMono:Bold
@@ -25,6 +25,18 @@ scripts:
         Launch Spacemice drivers.
       terminal: true
       group: A-ZZZA-setup_robot
+    - label: Open Left
+      script: open_left_gripper.sh
+      group: A-ZZZB-Grippers
+    - label: Grasp Left
+      script: close_left_gripper.sh
+      group: A-ZZZB-Grippers
+    - label: Open Right
+      script: open_right_gripper.sh
+      group: A-ZZZB-Grippers
+    - label: Grasp Right
+      script: close_right_gripper.sh
+      group: A-ZZZB-Grippers
     - label: Move to zero state
       script: move_to_zero.sh
       tooltip: |
