@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- this launch file is the most basic simulation of the robot -->
+<launch>
+    <arg name="rviz" default="true" />
+
+    <arg name="joint_sliders" default="true" />
+    <arg name="frequency" default="30.0" />
+
+    <include file="$(find cu_kinova_description)/launch/upload_description.launch" />
+
+    <group ns="joint_state_publisher">
+        <param name="publish_frequency" value="$(arg frequency)" />
+    </group>
+    <node unless="$(arg joint_sliders)" pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+    <node if="$(arg joint_sliders)" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" value="$(arg frequency)" />
+    </node>
+
+    <include file="$(dirname)/rviz.launch" if="$(arg rviz)" />
+</launch>
