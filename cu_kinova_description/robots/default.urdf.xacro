@@ -91,13 +91,13 @@
     <joint name="table_top_to_left_base_mount_joint" type="fixed">
         <child link="left_base_mount" />
         <parent link="table_top" />
-        <origin xyz="-0.31451 0.53471 0.00" rpy="0 0 -0.03490658503988659"/>
+        <origin xyz="-0.31034 0.48503 -0.0049568" rpy="3.141592653589793 3.141592653589793 3.1276300195738385"/>
     </joint>
 
-    <joint name="left_to_right_base" type="fixed">
+    <joint name="table_top_to_right_base_mount_joint" type="fixed">
         <child link="right_base_mount" />
-        <parent link="left_base_mount" />
-        <origin xyz="0.0311126 -1.05908 0" rpy="0 0 0.04363323129985824" />
+        <parent link="table_top" />
+        <origin xyz="-0.32043 -0.57264 -0.0074382" rpy="3.141592653589793 3.141592653589793 3.1066860685499065" />
     </joint>
 
     <xacro:load_robot 
