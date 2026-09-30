@@ -54,6 +54,11 @@ scripts:
         Move to resting state
         before shutting down the arms.
       group: B-move
+    - label: Demo Videos
+      script: demo_videos.sh
+      group: D-demo
+      tooltip: |
+        Show robot-specific demo videos in fullscreen
 #    - label: RQT reconfigure
 #      script: rqt_reconfigure.sh
 #      tooltip: RQT gui for dynamic_reconfigure
