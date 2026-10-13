@@ -30,4 +30,7 @@
     </group>
     <include file="$(find tts_piper)/launch/tts_standalone.launch" />
     <include if="$(arg rviz)" file="$(dirname)/rviz.launch" />
+
+    <!-- monitor model collisions and lift arms up from table surface -->
+    <node name="initial_collision_recovery" pkg="cu_kinova_table_motions" type="initial_lift" />
 </launch>

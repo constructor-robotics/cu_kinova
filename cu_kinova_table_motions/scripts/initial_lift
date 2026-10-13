@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+
+import rospy
+import moveit_commander
+import kortex_driver.msg
+from sensor_msgs.msg import JointState
+from moveit_msgs.srv import GetStateValidity, GetStateValidityRequest
+
+
+LIFT_SPEED = 0.02       # m/s
+MAX_LIFT_TIME = 1.0     # seconds
+RATE = 10               # Hz
+
+
+def make_velocity(z):
+    command = kortex_driver.msg.TwistCommand()
+    twist = kortex_driver.msg.Twist()
+
+    twist.linear_x = 0.0
+    twist.linear_y = 0.0
+    twist.linear_z = z
+
+    twist.angular_x = 0.0
+    twist.angular_y = 0.0
+    twist.angular_z = 0.0
+
+    command.twist = twist
+
+    command.reference_frame = 3
+    command.duration = 0
+
+    return command
+
+def get_colliding_arms(result):
+    arms = set()
+    other_collision = None
+
+    for contact in result.contacts:
+        body1 = contact.contact_body_1
+        body2 = contact.contact_body_2
+
+        # only automatically recover collisions with the table
+        if body1 == "table":
+            robot_link = body2
+        elif body2 == "table":
+            robot_link = body1
+        else:
+            if not other_collision:
+                other_collision = f"{body1} <-> {body2}"
+            continue
+
+        if robot_link.startswith("left_"):
+            arms.add("left")
+        elif robot_link.startswith("right_"):
+            arms.add("right")
+        else:
+            if not other_collision:
+                other_collision = f"{body1} <-> {body2}"
+
+    return arms, other_collision
+
+class RobotUplifter:
+    def __init__(self):
+        self.robot = moveit_commander.RobotCommander()
+
+        self.left_pub = rospy.Publisher(
+            "/left/in/cartesian_velocity",
+            kortex_driver.msg.TwistCommand,
+            queue_size=1
+        )
+
+        self.right_pub = rospy.Publisher(
+            "/right/in/cartesian_velocity",
+            kortex_driver.msg.TwistCommand,
+            queue_size=1
+        )
+
+        rospy.loginfo("Waiting for MoveIt state validity service...")
+        rospy.wait_for_service("/check_state_validity")
+
+        self.check_state_service = rospy.ServiceProxy(
+            "/check_state_validity",
+            GetStateValidity
+        )
+        
+    def check_state(self):
+        request = GetStateValidityRequest()
+        request.robot_state = self.robot.get_current_state()
+        request.group_name = ""
+
+        result = self.check_state_service(request)
+
+        return get_colliding_arms(result)
+
+    def stop_arms(self):
+        stop = make_velocity(0.0)
+
+        #send zero commands to make sure the arm stops
+        for _ in range(3):
+            self.left_pub.publish(stop)
+            self.right_pub.publish(stop)
+            rospy.sleep(0.05)
+
+        rospy.sleep(0.5)
+
+    def move_arms_up(self, arms):
+        rospy.logwarn("%s arm(s) colliding with table. Moving up to clear collision.", ", ".join(sorted(arms)))
+        
+        # wait for the drivers we need
+        if "left" in arms:
+    
+            while self.left_pub.get_num_connections() == 0 and not rospy.is_shutdown():
+                rospy.loginfo_throttle(5.0, "Waiting for left arm Cartesian controller...")
+                rospy.sleep(0.1)
+    
+        if "right" in arms:
+            while self.right_pub.get_num_connections() == 0 and not rospy.is_shutdown():
+                rospy.loginfo_throttle(5.0, "Waiting for right arm Cartesian controller...")
+                rospy.sleep(0.1)
+    
+        # recovery
+        up = make_velocity(LIFT_SPEED)
+        rate = rospy.Rate(RATE)
+    
+        start_time = rospy.Time.now()
+    
+        while not rospy.is_shutdown():
+    
+            elapsed = (rospy.Time.now() - start_time).to_sec()
+    
+            if elapsed >= MAX_LIFT_TIME:
+                rospy.logerr(f"Could not move the colliding arms away from table within {MAX_LIFT_TIME} seconds.")
+                break
+    
+            if "left" in arms:
+                self.left_pub.publish(up)
+    
+            if "right" in arms:
+                self.right_pub.publish(up)
+    
+            rate.sleep()
+    
+            #recheck collision state while moving
+            current_arms, current_unexpected = self.check_state()
+    
+            if not current_arms:  # if no arms are colliding
+                rospy.loginfo(
+                    "Stopping recovery."
+                )
+                break
+    
+            #make sure no unexpected collision appeared    
+            if current_unexpected:
+                rospy.logerr(
+                    "Unexpected collision detected during recovery. Stopping."
+                )
+                break
+    
+        #stop movement explicitly
+        self.stop_arms()
+
+
+
+def main():
+    rospy.init_node("initial_collision_recovery")
+
+    robot_uplifter = RobotUplifter()
+
+    #check starting state
+    colliding_arms, unexpected_collisions = robot_uplifter.check_state()
+    
+    if colliding_arms and not unexpected_collisions:
+        robot_uplifter.move_arms_up(colliding_arms)
+
+    colliding_arms, unexpected_collisions = robot_uplifter.check_state()
+
+    if not unexpected_collisions and not colliding_arms:
+        rospy.loginfo("No model collisions after startup.")
+        return
+    
+    r = rospy.Rate(RATE)
+    while not rospy.is_shutdown():
+        colliding_arms, unexpected_collisions = robot_uplifter.check_state()
+        if not colliding_arms and not unexpected_collisions:
+            rospy.loginfo("Collisions were cleared.")
+            break
+        log= "Robot is in collision after startup."
+        if colliding_arms:
+            log += f"\n{', '.join(colliding_arms)} arm(s) colliding with the table."
+        if unexpected_collisions:
+            log += f"\nThere are unexpected collisions: {unexpected_collisions}."
+        log += "\nMove robot to safe state manually."
+        rospy.logerr_throttle(10.0, log)
+        r.sleep()
+
+if __name__ == "__main__":
+    main()
