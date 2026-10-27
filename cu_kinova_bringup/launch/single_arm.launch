@@ -15,8 +15,11 @@
         and not to node/topic names which are namespaced already through this launch group.
         Set arg "prefix" to use with subst_value below
         -->
-        <arg name="prefix" value="$(arg side)_"/>
-        <rosparam command="load" ns="$(arg side)_driver" file="$(find kortex_description)/arms/gen3/7dof/config/joint_limits.yaml" subst_value="true"/>
+        <group ns="$(arg side)_driver">
+            <arg name="prefix" value="$(arg side)_"/>
+            <rosparam command="load" file="$(find kortex_description)/arms/gen3/7dof/config/joint_limits.yaml" subst_value="true"/>
+            <rosparam command="load" file="$(find kortex_description)/grippers/robotiq_2f_85/config/joint_limits.yaml" subst_value="true"/>
+        </group>
 
         <include file="$(find kinova_vision)/launch/kinova_vision.launch">
             <arg name="device" value="$(arg side)-arm" />
