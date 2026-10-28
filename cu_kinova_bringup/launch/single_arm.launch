@@ -9,6 +9,8 @@
             <arg name="gripper" value="robotiq_2f_85"/>
             <arg name="robot_name" value="$(arg side)"/>
             <arg name="use_hard_limits" value="true"/>
+            <!-- publish cyclic feedback at 100 Hz -->
+            <arg name="cyclic_data_publish_rate" value="100"/>
         </include>
         <!--
         override this yaml configuration here specifically to only add the prefix to joint names in /joint_states

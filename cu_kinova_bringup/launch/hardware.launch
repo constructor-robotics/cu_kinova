@@ -13,7 +13,7 @@
 
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam param="source_list">[left/base_feedback/joint_state,right/base_feedback/joint_state]</rosparam>
-        <param name="rate" value="40" />
+        <param name="rate" value="100" />
     </node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
