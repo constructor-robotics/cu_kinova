@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec roslaunch kinova_explorer bimanual_teleop.launch
+exec roslaunch cu_kinova_explorer bimanual_teleop.launch
