@@ -33,4 +33,8 @@
 
     <!-- monitor model collisions and lift arms up from table surface -->
     <node name="initial_collision_recovery" pkg="cu_kinova_table_motions" type="initial_lift" />
+
+    <!-- start space mice teleoperation (initially disabled) -->
+    <include file="$(find cu_kinova_explorer)/launch/bimanual_teleop.launch" />
+
 </launch>
